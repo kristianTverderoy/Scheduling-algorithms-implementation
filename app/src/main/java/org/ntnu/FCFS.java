@@ -3,10 +3,61 @@
  */
 package org.ntnu;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 public class FCFS implements Strategy {
 
+  private List<Process> processes;
+
+  public FCFS(ArrayList<Process> processes) {
+
+    this.processes = processes;
+
+  }
   @Override
   public void execute() {
+
+    processes.sort(Comparator.comparingInt(Process::getArrivalTime));
+
+    int currentTime = 0;
+
+    for (Process process : processes) {
+
+      if (currentTime < process.getArrivalTime()) {
+        currentTime = process.getArrivalTime();
+      }
+
+      // CompletionTime
+
+      int completionTime = currentTime + process.getRemainingBurstTime();
+      process.setCompletionTime(completionTime);
+
+      //TurnaroundTime = CompletionTime - ArrivalTime
+
+      int turnAroundTime = completionTime - process.getArrivalTime();
+      process.setTurnAroundTime(turnAroundTime);
+
+      //WaitingTime = TurnaroundTime - BurstTime
+
+      int waitingTime = turnAroundTime - process.getRemainingBurstTime();
+      process.setWaitingTime(waitingTime);
+
+      currentTime = completionTime;
+    }
+
+
+
+
+
+
+
+
+    //AverageWaitingTime
+
+    //AverageTurnaroundTime
+
 
   }
 }
