@@ -3,6 +3,10 @@
  */
 package org.ntnu;
 
-public class FCFS {
+public class FCFS implements Strategy {
 
+  @Override
+  public void execute() {
+
+  }
 }

@@ -1,5 +1,9 @@
 package org.ntnu;
 
-public class SRTF {
+public class SRTF implements Strategy {
 
+  @Override
+  public void execute() {
+
+  }
 }
