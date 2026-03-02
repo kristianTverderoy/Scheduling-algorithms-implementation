@@ -5,11 +5,17 @@ public class Process {
   private int processID;
   private int arrivalTime;
   private boolean isFinished = false;
+  private int completionTime;
+  private int turnAroundTime;
+  private int waitingTime;
+  private int startBurstTime;
 
   public Process(int processID, int startBurstTime, int arrivalTime) {
     this.remainingBurstTime = startBurstTime;
     this.processID = processID;
     this.arrivalTime = arrivalTime;
+    this.startBurstTime = startBurstTime;
+
   }
 
   public void minusOneBurstTime() {
@@ -39,4 +45,33 @@ public class Process {
   public int getRemainingBurstTime() {
     return this.remainingBurstTime;
   }
+
+  public int getStartBurstTime() {
+    return this.startBurstTime;
+  }
+
+  public void setCompletionTime(int completionTime) {
+    this.completionTime = completionTime;
+  }
+
+  public void setTurnAroundTime(int turnAroundTime) {
+    this.turnAroundTime = turnAroundTime;
+  }
+
+  public void setWaitingTime(int waitingTime) {
+    this.waitingTime = waitingTime;
+  }
+
+  public int getCompletionTime() {
+    return this.completionTime;
+  }
+
+  public int getTurnAroundTime() {
+    return this.turnAroundTime;
+  }
+
+  public int getWaitingTime() {
+    return this.waitingTime;
+  }
+
 }
