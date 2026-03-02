@@ -35,4 +35,8 @@ public class Process {
   public int getArrivalTime() {
     return this.arrivalTime;
   }
+
+  public int getRemainingBurstTime() {
+    return this.remainingBurstTime;
+  }
 }
