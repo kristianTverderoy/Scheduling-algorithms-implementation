@@ -9,6 +9,7 @@ public class Main {
 
     Context context = new Context();
     context.setStrategy(new FCFS());
+    context.executeStrat();
 
   }
 }

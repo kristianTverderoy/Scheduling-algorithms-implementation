@@ -18,6 +18,11 @@ public class Process {
 
   }
 
+  public Process(int processID, int startBurstTime) {
+    this.processID = processID;
+    this.remainingBurstTime = startBurstTime;
+  }
+
   public void minusOneBurstTime() {
     this.remainingBurstTime -= 1;
 
@@ -32,6 +37,10 @@ public class Process {
 
   private void setFinished() {
     this.isFinished = true;
+  }
+
+  public void setArrivalTime(int arrivalTime) {
+    this.arrivalTime = arrivalTime;
   }
 
   public int getID() {
