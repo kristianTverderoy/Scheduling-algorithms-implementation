@@ -6,50 +6,37 @@ import java.util.List;
 public class SJF implements Strategy {
   private int totalTime = 0;
   private List<Process> processes;
+  private List<Process> finishedProcesses = new ArrayList<>();
 
   public SJF(List<Process> processes) {
     this.processes = processes;
   }
 
   @Override
-  public void execute() {
+  public List<Process> execute() {
     boolean finished = false;
-    List<Integer> turnaroundTimes = new ArrayList<Integer>();
-    List<Integer> waitingTimes = new ArrayList<Integer>();
-    System.out.println("Shortest Job First:\n" +
-                      "========================================");
+    
 
     while (!finished) {
       Process currentProcess = shortestAvailableJob();
       if (shortestAvailableJob() != null) {
-        int completionTime = totalTime + currentProcess.getRemainingBurstTime();
-        int turnaroundTime = completionTime - currentProcess.getArrivalTime();
-        int waitingTime = turnaroundTime - currentProcess.getRemainingBurstTime();
+        currentProcess.setCompletionTime(totalTime + currentProcess.getRemainingBurstTime());
+        currentProcess.setTurnAroundTime(currentProcess.getCompletionTime() - currentProcess.getArrivalTime());
+        currentProcess.setWaitingTime(currentProcess.getTurnAroundTime() - currentProcess.getRemainingBurstTime());
 
-        turnaroundTimes.add(turnaroundTime);
-        waitingTimes.add(waitingTime);
-
-        System.out.println(
-                            "Process " + currentProcess.getID() + "finished\n" +
-                            "Completion time = " + completionTime + "\n" +
-                            "Turnaround time = " + turnaroundTime + "\n" +
-                            "Waiting time = " + waitingTime + "\n"
-                          );
+        this.finishedProcesses.add(currentProcess.getID(), currentProcess);
         this.processes.remove(currentProcess);
       }
       this.totalTime++;
 
       if (this.processes.isEmpty()) {
         finished = true;
+        printResults();
+        return this.finishedProcesses;
       }
     }
-    double averageTurnaroundTime = turnaroundTimes.stream().mapToInt(Integer::intValue).average().orElse(0.0);
-    double averageWaitingTime = waitingTimes.stream().mapToInt(Integer::intValue).average().orElse(0.0);
 
-    System.out.println("Average turnaround time = " + averageTurnaroundTime);
-    System.out.println("Average waiting time = " + averageWaitingTime);
-    System.out.println("Total time spent = " + this.totalTime);
-    System.out.println("========================================\n");
+    
   }
 
 
@@ -65,5 +52,27 @@ public class SJF implements Strategy {
       }
     }
     return shortestProcess;
+  }
+
+  public void printResults() {
+    System.out.println("Shortest Job First:\n" +
+                      "========================================");
+
+    double averageTurnaroundTime = 0;
+    double averageWaitingTime = 0;
+    for (Process process : this.finishedProcesses) {
+      System.out.println(
+                          "Process " + process.getID() + "finished\n" +
+                          "Completion time = " + process.getCompletionTime() + "\n" +
+                          "Turnaround time = " + process.getTurnAroundTime() + "\n" +
+                          "Waiting time = " + process.getWaitingTime() + "\n"
+                        );
+    }
+
+
+    System.out.println("Average turnaround time = " + averageTurnaroundTime/this.finishedProcesses.size());
+    System.out.println("Average waiting time = " + averageWaitingTime/this.finishedProcesses.size());
+    System.out.println("Total time spent = " + this.totalTime);
+    System.out.println("========================================\n");
   }
 }
