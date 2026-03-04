@@ -65,8 +65,10 @@ public class SJF implements Strategy {
     double averageTurnaroundTime = 0;
     double averageWaitingTime = 0;
     for (Process process : this.finishedProcesses) {
+      averageTurnaroundTime += process.getTurnAroundTime();
+      averageWaitingTime += process.getWaitingTime();
       System.out.println(
-                          "Process " + process.getID() + "finished\n" +
+                          "Process " + process.getID() + " finished\n" +
                           "Completion time = " + process.getCompletionTime() + "\n" +
                           "Turnaround time = " + process.getTurnAroundTime() + "\n" +
                           "Waiting time = " + process.getWaitingTime() + "\n"

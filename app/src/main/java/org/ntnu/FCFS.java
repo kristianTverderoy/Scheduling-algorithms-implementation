@@ -53,7 +53,30 @@ public class FCFS implements Strategy {
     // AverageWaitingTime
 
     // AverageTurnaroundTime
+    printResults(currentTime);
     return finishedProcesses;
 
+  }
+
+  public void printResults(int time) {
+    System.out.println("First Come First Serve:\n" +
+                      "========================================");
+
+    double averageTurnaroundTime = 0;
+    double averageWaitingTime = 0;
+    for (Process process : this.processes) {
+      averageTurnaroundTime += process.getTurnAroundTime();
+      averageWaitingTime += process.getWaitingTime();
+      System.out.println(
+                          "Process " + process.getID() + " finished\n" +
+                          "Completion time = " + process.getCompletionTime() + "\n" +
+                          "Turnaround time = " + process.getTurnAroundTime() + "\n" +
+                          "Waiting time = " + process.getWaitingTime() + "\n"
+                        );
+    }
+    System.out.println("Average turnaround time = " + averageTurnaroundTime/this.processes.size());
+    System.out.println("Average waiting time = " + averageWaitingTime/this.processes.size());
+    System.out.println("Total time spent = " + time);
+    System.out.println("========================================\n");
   }
 }

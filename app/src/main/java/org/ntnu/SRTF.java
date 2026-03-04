@@ -74,6 +74,7 @@ public class SRTF implements Strategy {
         currentTime++;
       }
     }
+    printResults(finishedProcesses, currentTime);
     return finishedProcesses;
   }
 
@@ -83,4 +84,25 @@ public class SRTF implements Strategy {
     this.pq.add(process);
   }
 
+  public void printResults(List<Process> p, int time) {
+    System.out.println("Shortest Remaining Time First:\n" +
+                      "========================================");
+
+    double averageTurnaroundTime = 0;
+    double averageWaitingTime = 0;
+    for (Process process : p) {
+      averageTurnaroundTime += process.getTurnAroundTime();
+      averageWaitingTime += process.getWaitingTime();
+      System.out.println(
+                          "Process " + process.getID() + " finished\n" +
+                          "Completion time = " + process.getCompletionTime() + "\n" +
+                          "Turnaround time = " + process.getTurnAroundTime() + "\n" +
+                          "Waiting time = " + process.getWaitingTime() + "\n"
+                        );
+    }
+    System.out.println("Average turnaround time = " + averageTurnaroundTime/p.size());
+    System.out.println("Average waiting time = " + averageWaitingTime/p.size());
+    System.out.println("Total time spent = " + time);
+    System.out.println("========================================\n");
+  }
 }
