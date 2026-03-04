@@ -20,11 +20,11 @@ public class SJF implements Strategy {
     while (!finished) {
       Process currentProcess = shortestAvailableJob();
       if (shortestAvailableJob() != null) {
-        currentProcess.setCompletionTime(totalTime + currentProcess.getRemainingBurstTime());
+        currentProcess.setCompletionTime(this.totalTime + currentProcess.getRemainingBurstTime());
         currentProcess.setTurnAroundTime(currentProcess.getCompletionTime() - currentProcess.getArrivalTime());
         currentProcess.setWaitingTime(currentProcess.getTurnAroundTime() - currentProcess.getRemainingBurstTime());
 
-        this.finishedProcesses.add(currentProcess.getID(), currentProcess);
+        this.finishedProcesses.add(currentProcess);
         this.processes.remove(currentProcess);
       }
       this.totalTime++;
@@ -68,8 +68,6 @@ public class SJF implements Strategy {
                           "Waiting time = " + process.getWaitingTime() + "\n"
                         );
     }
-
-
     System.out.println("Average turnaround time = " + averageTurnaroundTime/this.finishedProcesses.size());
     System.out.println("Average waiting time = " + averageWaitingTime/this.finishedProcesses.size());
     System.out.println("Total time spent = " + this.totalTime);
