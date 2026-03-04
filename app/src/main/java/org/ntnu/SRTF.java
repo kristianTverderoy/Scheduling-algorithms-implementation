@@ -13,14 +13,13 @@ public class SRTF implements Strategy {
   // Shortest Remaining Time First
 
   private List<Process> processes = new CopyOnWriteArrayList<>();
-  private Queue<Process> pq = new PriorityBlockingQueue<>(11, Comparator.comparingInt(Process::getRemainingBurstTime));
+  private Queue<Process> pq = new PriorityBlockingQueue<>(11, Comparator.comparingInt(Process::getRemainingBurstTime)
+          .thenComparingInt(Process::getArrivalTime));
   private int totalTime;
-  private String ganntChartString = ""; // looks like this [(startTime - Process - End time), (startTime
-                                        // - Process - End time)... ->]
+
 
   public SRTF(List<Process> processList) {
     this.processes = processList;
-    this.pq.addAll(processes);
   }
 
   @Override
@@ -41,27 +40,34 @@ public class SRTF implements Strategy {
 
       if (!pq.isEmpty()) {
         Process current = pq.poll();
+        if (current.getID() == 3) {
+          System.out.println("Process 3 finished at time: " + currentTime);
+        }
         current.minusOneBurstTime();
         currentTime++;
 
-        // Re-check for newly arrived processes before re-adding
-        for (Process p : processes) {
-          if (p.getArrivalTime() <= currentTime
-              && !p.isFinished()
-              && !pq.contains(p)
-              && p != current) {
-            pq.add(p);
-          }
-        }
+//        // Re-check for newly arrived processes before re-adding
+//        for (Process p : processes) {
+//
+//          if (p.getArrivalTime() <= currentTime
+//              && !p.isFinished()
+//              && !pq.contains(p)
+//              && p != current) {
+//            pq.add(p);
+//          }
+//        }
 
         if (current.isFinished()) {
+
           current.setCompletionTime(currentTime);
           current.setTurnAroundTime(currentTime - current.getArrivalTime());
           current.setWaitingTime(current.getTurnAroundTime() - current.getStartBurstTime());
-          finishedProcesses.add(current.getID(), current);
+          finishedProcesses.add(current);
           completed++;
         } else {
-          pq.add(current);
+            pq.add(current);
+
+
         }
       } else {
         // No process available, advance time

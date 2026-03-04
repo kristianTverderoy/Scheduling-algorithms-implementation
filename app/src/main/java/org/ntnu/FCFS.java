@@ -45,7 +45,7 @@ public class FCFS implements Strategy {
 
       int waitingTime = turnAroundTime - process.getRemainingBurstTime();
       process.setWaitingTime(waitingTime);
-      finishedProcesses.add(process.getID(), process);
+      finishedProcesses.add(process);
 
       currentTime = completionTime;
     }

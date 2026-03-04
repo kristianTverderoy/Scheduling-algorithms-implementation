@@ -1,6 +1,7 @@
 package org.ntnu;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class SJF implements Strategy {
@@ -26,8 +27,11 @@ public class SJF implements Strategy {
 
         this.finishedProcesses.add(currentProcess);
         this.processes.remove(currentProcess);
+        this.totalTime += currentProcess.getStartBurstTime();
+      } else {
+        this.totalTime++;
       }
-      this.totalTime++;
+
 
       if (this.processes.isEmpty()) {
         finished = true;
@@ -36,7 +40,7 @@ public class SJF implements Strategy {
       }
     }
 
-    
+    return null;
   }
 
 
