@@ -1,8 +1,10 @@
 package org.ntnu;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.PriorityBlockingQueue;
@@ -22,8 +24,8 @@ public class SRTF implements Strategy {
   }
 
   @Override
-  public void execute() {
-
+  public List<Process> execute() {
+    List<Process> finishedProcesses = new ArrayList<>();
     int currentTime = 0;
     int completed = 0;
 
@@ -49,15 +51,14 @@ public class SRTF implements Strategy {
               && !pq.contains(p)
               && p != current) {
             pq.add(p);
-
           }
         }
 
         if (current.isFinished()) {
-
           current.setCompletionTime(currentTime);
           current.setTurnAroundTime(currentTime - current.getArrivalTime());
           current.setWaitingTime(current.getTurnAroundTime() - current.getStartBurstTime());
+          finishedProcesses.add(current.getID(), current);
           completed++;
         } else {
           pq.add(current);
@@ -67,6 +68,7 @@ public class SRTF implements Strategy {
         currentTime++;
       }
     }
+    return finishedProcesses;
   }
 
   public synchronized void addProcess(Process process) {
@@ -75,8 +77,4 @@ public class SRTF implements Strategy {
     this.pq.add(process);
   }
 
-  @Override
-  public String getGanntChartString() {
-    return this.ganntChartString;
-  }
 }

@@ -11,18 +11,19 @@ public class FCFS implements Strategy {
 
   private List<Process> processes;
 
-  public FCFS(ArrayList<Process> processes) {
+  public FCFS(List<Process> processes) {
 
     this.processes = processes;
 
   }
 
   @Override
-  public void execute() {
+  public List<Process> execute() {
 
     processes.sort(Comparator.comparingInt(Process::getArrivalTime));
 
     int currentTime = 0;
+    List<Process> finishedProcesses = new ArrayList<>();
 
     for (Process process : processes) {
 
@@ -44,6 +45,7 @@ public class FCFS implements Strategy {
 
       int waitingTime = turnAroundTime - process.getRemainingBurstTime();
       process.setWaitingTime(waitingTime);
+      finishedProcesses.add(process.getID(), process);
 
       currentTime = completionTime;
     }
@@ -51,6 +53,7 @@ public class FCFS implements Strategy {
     // AverageWaitingTime
 
     // AverageTurnaroundTime
+    return finishedProcesses;
 
   }
 }

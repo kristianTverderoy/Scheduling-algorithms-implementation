@@ -10,10 +10,12 @@ import static org.junit.Assert.*;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 public class AppTest {
 
-  private ArrayList<Process> pl;
+  private List<Process> pl;
   private Context c;
 
   @Before
@@ -30,19 +32,27 @@ public class AppTest {
   @Test
   public void testFCFSAlgorithm() {
     this.c.setStrategy(new FCFS(this.pl));
-
-    String fcfsGannt = "[(0 - P0 - 5),(5 - P1 - 8), (8 - P2 - 15), (15 - P3 - 16), (16 - P4 - 18)]";
-    assertEquals(fcfsGannt, this.c.executeStrat());
+    List<Process> values = this.c.executeStrat();
+    values.indexOf
+    assertEquals("");
 
   }
 
   @Test
   public void testSJFAlgorithm() {
     this.c.setStrategy(new SJF(this.pl));
+    Map<Integer, ArrayList<Integer>> values = this.c.executeStrat();
 
-    String fcfsGannt = "[(0 - P0 - 5),(5 - P1 - 8), (8 - P3 - 15), (15 - P4 - 16), (16 - P5 - 18)]";
-    assertEquals(fcfsGannt, this.c.executeStrat());
+    assertEquals("");
 
+  }
+
+  @Test
+  public void testSRTFAlgorithm() {
+    this.c.setStrategy(new SRTF(pl));
+    Map<Integer, ArrayList<Integer>> values = this.c.executeStrat();
+
+    assertEquals("");
   }
 
 }

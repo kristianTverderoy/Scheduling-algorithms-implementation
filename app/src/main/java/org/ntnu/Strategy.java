@@ -1,7 +1,9 @@
 package org.ntnu;
 
-public interface Strategy {
-  public void execute();
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-  public String getGanntChartString();
+public interface Strategy {
+  public List<Process> execute();
 }

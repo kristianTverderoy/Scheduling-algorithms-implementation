@@ -1,5 +1,7 @@
 package org.ntnu;
 
+import java.util.List;
+
 public class Context {
 
   private Strategy currentStrategy;
@@ -11,10 +13,9 @@ public class Context {
     this.currentStrategy = newStrat;
   }
 
-  public String executeStrat() {
+  public List<Process> executeStrat() {
     if (this.currentStrategy != null) {
-      this.currentStrategy.execute();
-      return this.currentStrategy.getGanntChartString();
+      return this.currentStrategy.execute();
     }
     return null;
 
