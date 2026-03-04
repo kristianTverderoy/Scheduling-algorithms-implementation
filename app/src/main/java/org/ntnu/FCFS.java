@@ -16,6 +16,7 @@ public class FCFS implements Strategy {
     this.processes = processes;
 
   }
+
   @Override
   public void execute() {
 
@@ -34,12 +35,12 @@ public class FCFS implements Strategy {
       int completionTime = currentTime + process.getRemainingBurstTime();
       process.setCompletionTime(completionTime);
 
-      //TurnaroundTime = CompletionTime - ArrivalTime
+      // TurnaroundTime = CompletionTime - ArrivalTime
 
       int turnAroundTime = completionTime - process.getArrivalTime();
       process.setTurnAroundTime(turnAroundTime);
 
-      //WaitingTime = TurnaroundTime - BurstTime
+      // WaitingTime = TurnaroundTime - BurstTime
 
       int waitingTime = turnAroundTime - process.getRemainingBurstTime();
       process.setWaitingTime(waitingTime);
@@ -47,17 +48,9 @@ public class FCFS implements Strategy {
       currentTime = completionTime;
     }
 
+    // AverageWaitingTime
 
-
-
-
-
-
-
-    //AverageWaitingTime
-
-    //AverageTurnaroundTime
-
+    // AverageTurnaroundTime
 
   }
 }

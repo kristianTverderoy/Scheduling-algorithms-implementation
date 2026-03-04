@@ -3,13 +3,34 @@
  */
 package org.ntnu;
 
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class AppTest {
 
+  @Before
+  public void initialize() {
+    ArrayList<Process> pl = new ArrayList<>(Arrays.asList(
+        new Process(0, 5, 0),
+        new Process(1, 3, 2),
+        new Process(2, 7, 5),
+        new Process(3, 1, 9),
+        new Process(4, 2, 9)));
+
+  }
+
   @Test
-  public void SRTFTest() {
+  public void testFCFSAlgorithm() {
+    Context c = new Context();
+
+    c.setStrategy(new FCFS(pl));
+    String fcfsGannt = "[(0 - P0 - 5),(5 - P1 - 8), (8 - P3 - 15), (15 - P4 - 16), (16 - P5 - 18)]";
+    assertEquals(fcfsGannt, c.executeStrat());
 
   }
 }

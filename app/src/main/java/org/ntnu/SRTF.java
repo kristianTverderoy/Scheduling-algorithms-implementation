@@ -13,6 +13,8 @@ public class SRTF implements Strategy {
   private List<Process> processes = new CopyOnWriteArrayList<>();
   private Queue<Process> pq = new PriorityBlockingQueue<>(11, Comparator.comparingInt(Process::getRemainingBurstTime));
   private int totalTime;
+  private String ganntChartString = ""; // looks like this [(startBurstTime - Process - TurnAroundTime), (startBurstTime
+                                        // - Process - TurnAroundTime)... ->]
 
   public SRTF(List<Process> processList) {
     this.processes = processList;
@@ -73,4 +75,8 @@ public class SRTF implements Strategy {
     this.pq.add(process);
   }
 
+  @Override
+  public String getGanntChartString() {
+    return this.ganntChartString;
+  }
 }
