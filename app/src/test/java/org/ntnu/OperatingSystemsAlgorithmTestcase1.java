@@ -63,11 +63,6 @@ public class OperatingSystemsAlgorithmTestcase1 {
   }
 
   @Test
-  public void testFCFSAlgorithmCase2() {
-
-  }
-
-  @Test
   public void testSJFAlgorithmCase1() {
     this.c.setStrategy(new SJF(this.pl));
     List<Process> values = this.c.executeStrat();
