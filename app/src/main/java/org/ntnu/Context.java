@@ -11,9 +11,12 @@ public class Context {
     this.currentStrategy = newStrat;
   }
 
-  public void executeStrat() {
+  public String executeStrat() {
     if (this.currentStrategy != null) {
       this.currentStrategy.execute();
+      return this.currentStrategy.getGanntChartString();
     }
+    return null;
+
   }
 }

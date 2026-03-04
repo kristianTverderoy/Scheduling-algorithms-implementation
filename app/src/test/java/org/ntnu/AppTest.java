@@ -13,24 +13,36 @@ import java.util.Arrays;
 
 public class AppTest {
 
+  private ArrayList<Process> pl;
+  private Context c;
+
   @Before
   public void initialize() {
-    ArrayList<Process> pl = new ArrayList<>(Arrays.asList(
-        new Process(0, 5, 0),
-        new Process(1, 3, 2),
-        new Process(2, 7, 5),
-        new Process(3, 1, 9),
-        new Process(4, 2, 9)));
-
+    this.pl = new ArrayList<>(Arrays.asList(
+        new Process(1, 8, 0),
+        new Process(2, 4, 0),
+        new Process(3, 2, 0),
+        new Process(4, 6, 0),
+        new Process(5, 3, 0)));
+    this.c = new Context();
   }
 
   @Test
   public void testFCFSAlgorithm() {
-    Context c = new Context();
+    this.c.setStrategy(new FCFS(this.pl));
 
-    c.setStrategy(new FCFS(pl));
-    String fcfsGannt = "[(0 - P0 - 5),(5 - P1 - 8), (8 - P3 - 15), (15 - P4 - 16), (16 - P5 - 18)]";
-    assertEquals(fcfsGannt, c.executeStrat());
+    String fcfsGannt = "[(0 - P0 - 5),(5 - P1 - 8), (8 - P2 - 15), (15 - P3 - 16), (16 - P4 - 18)]";
+    assertEquals(fcfsGannt, this.c.executeStrat());
 
   }
+
+  @Test
+  public void testSJFAlgorithm() {
+    this.c.setStrategy(new SJF(this.pl));
+
+    String fcfsGannt = "[(0 - P0 - 5),(5 - P1 - 8), (8 - P3 - 15), (15 - P4 - 16), (16 - P5 - 18)]";
+    assertEquals(fcfsGannt, this.c.executeStrat());
+
+  }
+
 }
