@@ -7,16 +7,32 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * First Come First Serve CPU scheduling.
+ * No preemption
+ */
 public class FCFS implements Strategy {
 
+  // List containing processes to be scheduled
   private List<Process> processes;
 
+  /**
+   * Creates a FCFS scheduler with the given list of processes
+   *
+   * @param processes the list of processes to schedule
+   */
   public FCFS(List<Process> processes) {
 
     this.processes = processes;
 
   }
 
+  /**
+   * Executes the FCFS scheduling algorithm.
+   * Processes are sorted by arrival time and executed sequentially.
+   *
+   * @return a list of processes with updated completion, turnaround, and waiting times
+   */
   @Override
   public List<Process> execute() {
 
@@ -58,6 +74,11 @@ public class FCFS implements Strategy {
 
   }
 
+  /**
+   * Prints scheduling results including per-process stats and averages.
+   *
+   * @param time the total time spent executing all processes
+   */
   public void printResults(int time) {
     System.out.println("First Come First Serve:\n" +
                       "========================================");
