@@ -128,6 +128,6 @@ public class SRTF implements Strategy {
     System.out.println("Average turnaround time = " + averageTurnaroundTime/p.size());
     System.out.println("Average waiting time = " + averageWaitingTime/p.size());
     System.out.println("Total time spent = " + time);
-    System.out.println("========================================\n");
+    System.out.println("========================================\n\n");
   }
 }

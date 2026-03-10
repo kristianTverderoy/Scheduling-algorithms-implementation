@@ -101,6 +101,6 @@ public class SJF implements Strategy {
     System.out.println("Average turnaround time = " + averageTurnaroundTime/this.finishedProcesses.size());
     System.out.println("Average waiting time = " + averageWaitingTime/this.finishedProcesses.size());
     System.out.println("Total time spent = " + this.totalTime);
-    System.out.println("========================================\n");
+    System.out.println("========================================\n\n");
   }
 }
