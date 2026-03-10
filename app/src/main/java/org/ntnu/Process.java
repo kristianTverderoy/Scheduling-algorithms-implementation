@@ -1,5 +1,9 @@
 package org.ntnu;
 
+/**
+ * Represents a process in a CPU scheduling simulation.
+ * Stores burst time, arrival time, and computed scheduling metrics.
+ */
 public class Process {
   private int remainingBurstTime;
   private int processID;
@@ -10,6 +14,14 @@ public class Process {
   private int waitingTime;
   private int startBurstTime;
 
+
+  /**
+   * Creates a process with the given ID, burst time, and arrival time.
+   *
+   * @param processID       the unique identifier for this process
+   * @param startBurstTime  the initial burst time of the process
+   * @param arrivalTime     the time at which the process arrives in the queue
+   */
   public Process(int processID, int startBurstTime, int arrivalTime) {
     this.remainingBurstTime = startBurstTime;
     this.processID = processID;
@@ -17,12 +29,16 @@ public class Process {
     this.startBurstTime = startBurstTime;
 
   }
-
+  //UNUSED
   public Process(int processID, int startBurstTime) {
     this.processID = processID;
     this.remainingBurstTime = startBurstTime;
   }
 
+  /**
+   * Decrements the remaining burst time by one.
+   * Marks the process as finished if remaining burst time drops below one.
+   */
   public void minusOneBurstTime() {
     this.remainingBurstTime -= 1;
 
@@ -31,6 +47,11 @@ public class Process {
     }
   }
 
+  /**
+   * Returns whether the process has finished execution.
+   *
+   * @return {@code true} if the process is finished, {@code false}
+   */
   public boolean isFinished() {
     return this.isFinished;
   }

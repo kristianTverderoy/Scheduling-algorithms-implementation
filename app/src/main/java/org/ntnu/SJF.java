@@ -4,15 +4,30 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Shortest Job First.
+ * No preemption.
+ */
 public class SJF implements Strategy {
   private int totalTime = 0;
   private List<Process> processes;
   private List<Process> finishedProcesses = new ArrayList<>();
 
+  /**
+   * Creates a SJF scheduler with the given list of processes.
+   *
+   * @param processes the list of processes to schedule
+   */
   public SJF(List<Process> processes) {
     this.processes = processes;
   }
 
+  /**
+   * Executes the SJF scheduling algorithm.
+   * Always selects the available process with the smallest burst time.
+   *
+   * @return a list of processes with updated completion, turnaround, and waiting times
+   */
   @Override
   public List<Process> execute() {
     boolean finished = false;
@@ -44,6 +59,12 @@ public class SJF implements Strategy {
   }
 
 
+  /**
+   * Finds the shortest available job at the current time.
+   * A process is available if its arrival time is less than or equal to the current time.
+   *
+   * @return the process with the smallest remaining burst time, or {@code null} if none are available
+   */
   public Process shortestAvailableJob() {
     Process shortestProcess = null;
     for (Process process : this.processes) {
@@ -58,6 +79,9 @@ public class SJF implements Strategy {
     return shortestProcess;
   }
 
+  /**
+   * Prints scheduling results including per-process stats and averages.
+   */
   public void printResults() {
     System.out.println("Shortest Job First:\n" +
                       "========================================");
