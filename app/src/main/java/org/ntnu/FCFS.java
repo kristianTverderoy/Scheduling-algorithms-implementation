@@ -98,6 +98,6 @@ public class FCFS implements Strategy {
     System.out.println("Average turnaround time = " + averageTurnaroundTime/this.processes.size());
     System.out.println("Average waiting time = " + averageWaitingTime/this.processes.size());
     System.out.println("Total time spent = " + time);
-    System.out.println("========================================\n");
+    System.out.println("========================================\n\n");
   }
 }
